@@ -1,0 +1,138 @@
+<?xml version="1.0" ?> 
+<project name="Tp Grupal" default="uso" basedir=".">
+	<!-- Variables de configuracion -->
+	<!-- Directorios -->
+	<property name="name"           		      value="Tp Grupal"/>  
+	<property name="src"				      value="${basedir}/TP Pacman/src" />
+      <property name="main.class" 	       		value="controlador.ProgramaPrincipal" />
+	<property name="classes"			      value="${basedir}/TP Pacman/classes" />
+	<property name="vista"			      value="${basedir}/TP Pacman/classes/Vista" />
+	<property name="lib"				      value="${basedir}/TP Pacman/lib" />
+	<property name="dist"				      value="${basedir}/TP Pacman/dist" />
+      <property name="test.class1" 		            value="pruebas.testBlinky" />
+	<property name="test.class2" 		            value="pruebas.testBloque" />
+	<property name="test.class3" 	                  value="pruebas.testClyde" />
+	<property name="test.class4" 	                  value="pruebas.testFantasma" />
+	<property name="test.class5" 	             	value="pruebas.TestFruta" />
+	<property name="test.class6" 		            value="pruebas.testInky" />
+	<property name="test.class7" 		            value="pruebas.testJuego" />
+	<property name="test.class8" 	        	      value="pruebas.TestJugador" />
+	<property name="test.class9" 	                  value="pruebas.TestLaberinto" />
+	<property name="test.class10" 		      value="pruebas.TestNivel" />
+	<property name="test.class11" 		      value="pruebas.testPacman" />
+	<property name="test.class12" 		      value="pruebas.testPinky" />
+	<property name="test.class13" 		      value="pruebas.testPoint" />
+	<property name="test.class14" 		      value="pruebas.TestPunto" />
+	<property name="test.class15" 	            value="pruebas.TestPuntoPoder" />
+	<property name="test.class16" 	            value="pruebas.testTransportador" />
+	<property name="test.class17" 		      value="pruebas.TestVacio" />
+
+	<path id="idClasspath">
+		<pathelement location="${classes}" />
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+      	<!-- init -->
+	<target name="init" description="Mensaje bienvenida y crea el entorno de trabajo">
+		<mkdir dir="${src}"/>
+		<mkdir dir="${classes}"/>
+		<mkdir dir="${lib}"/>
+		<mkdir dir="${dist}"/>
+
+	</target>
+
+	<!-- classpath -->
+	<target name="setClasspath" depends="init" description="Establece el classpath">
+		<property name="classpath" refid="idClasspath" />
+		<echo message="Classpath = ${classpath}" />
+
+	</target>
+
+
+	<!-- build -->
+	<target name="build" depends="setClasspath" description="Compila todos los fuentes del proyecto">
+		<javac srcdir="${src}" destdir="${classes}" classpath="${classpath}" debug="on" fork="yes"/>
+		<copy todir="${vista}">
+    			<fileset dir="TP Pacman/Imagenes"/>
+  		</copy>
+		<echo message=""> </echo>
+		<echo message="build    --> El proyecto quedo compilado en la carpeta CLASSES "> </echo>
+
+	</target>
+
+
+	<!-- run -->
+	<target name="run" depends="build" description="Ejecuta la aplicacion">
+		<java
+			classname="${main.class}"
+			classpathref="idClasspath"
+			fork="true"
+			dir=".">
+		</java>
+
+		<echo message=""> </echo>
+		<echo message="run      --> Se ejecuto la aplicacion"> </echo>
+
+	</target>
+
+
+<!-- test -->
+<target name="test" depends="build" description="Ejecuta las pruebas unitarias del proyecto">
+ <junit>
+   <classpath>
+	<path location="TP Pacman/lib/junit.jar" />  
+	<path location="${classes}" />  
+   </classpath>
+  <formatter type="brief" usefile="false" />
+  <test name="${test.class1}" />
+   <test name="${test.class1}" />        
+   <test name="${test.class2}" />        
+   <test name="${test.class3}" /> 
+   <test name="${test.class4}" />
+   <test name="${test.class5}" />   
+   <test name="${test.class6}" />   
+   <test name="${test.class7}" />   
+   <test name="${test.class8}" />   
+   <test name="${test.class9}" />   
+   <test name="${test.class10}" />   
+   <test name="${test.class11}" />   
+   <test name="${test.class12}" />   
+   <test name="${test.class13}" />   
+   <test name="${test.class14}" />   
+   <test name="${test.class15}" />   
+   <test name="${test.class16}" />   
+   <test name="${test.class17}" />  
+</junit>
+ <echo message=""> </echo>
+ <echo message="runtest  --> Se ejecutaron los Test del proyecto"> </echo>
+</target>
+
+
+  <target name="jar" depends="build" >  
+	<mkdir dir="TP Pacman/classes/Vista"/>
+	<copy todir="Vista">
+    		<fileset dir="TP Pacman/Imagenes"/>
+  	</copy>
+        <jar jarfile="pacman.jar">  
+			<fileset dir="${classes}" excludes="**/*.jpg" excludes="**/*.JPG"/>
+            <manifest>  	         
+                <attribute name="Main-Class" value="controlador.ProgramaPrincipal"/>   
+				<attribute name="Class-Path" value="."/>              
+            </manifest>  
+       </jar>  
+ </target>  
+
+
+
+
+<!-- Uso -->
+ <target name="uso" depends="build" description="Informacion general">
+        <echo message=""></echo>
+        <echo message="Algoritmo III 2do Cuatrimestre 2009"></echo>
+        <echo message="Turno Jueves Noche"></echo>
+        <echo message="Grupo 8"></echo>
+        <echo message="Corrector : Guillermo Constantino"></echo>
+ </target>
+</project>
