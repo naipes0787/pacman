@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="test/ar/uba/fi/algo3/titiritero/ejemplo/modelo/|test/ar/uba/fi/algo3/titiritero/ejemplo/" kind="src" path="TP Pacman/src"/>
+	<classpathentry excluding="test/ar/uba/fi/algo3/titiritero/ejemplo/modelo/|test/ar/uba/fi/algo3/titiritero/ejemplo/" kind="src" path="pacman/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="output" path="TP Pacman/src"/>
+	<classpathentry kind="output" path="pacman/src"/>
 </classpath>
